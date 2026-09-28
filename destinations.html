@@ -1,0 +1,1774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SkyBlue Airport – Destinations</title>
+
+    <!-- Bootstrap 5 -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Bootstrap Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+    <!-- Google Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+        
+
+        :root {
+            --sky-blue: #38bdf8;
+            --sky-dark: #0284c7;
+            --sky-light: #e0f2fe;
+            --blue-dark: #0f172a;
+            --text-gray: #64748b;
+            --light-bg: #f8fbff;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            color: var(--blue-dark);
+            background: var(--white);
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================== */
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.07);
+            padding: 16px 0;
+        }
+
+        .navbar-brand {
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: var(--sky-dark);
+        }
+
+        .navbar-brand i {
+            color: var(--sky-blue);
+            margin-right: 7px;
+        }
+
+        .nav-link {
+            color: #334155 !important;
+            font-weight: 600;
+            margin-left: 18px;
+            transition: 0.3s;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--sky-dark) !important;
+        }
+
+        .nav-contact {
+            background: var(--sky-dark);
+            color: white !important;
+            padding: 9px 18px !important;
+            border-radius: 50px;
+        }
+
+        .nav-contact:hover {
+            background: #0369a1;
+        }
+
+        /* =========================
+           HERO
+        ========================== */
+
+        .page-hero {
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+
+            background:
+                linear-gradient(
+                    rgba(2, 132, 199, 0.72),
+                    rgba(14, 165, 233, 0.68)
+                ),
+                url("https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1800&q=85")
+                center/cover no-repeat;
+        }
+
+        .hero-content {
+            color: white;
+            max-width: 800px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.17);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            padding: 9px 18px;
+            border-radius: 50px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            backdrop-filter: blur(8px);
+        }
+
+        .page-hero h1 {
+            font-size: clamp(2.8rem, 6vw, 4.7rem);
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .page-hero p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 700px;
+            color: rgba(255, 255, 255, 0.93);
+        }
+
+        /* =========================
+           GENERAL
+        ========================== */
+
+        .section {
+            padding: 90px 0;
+        }
+
+        .section-light {
+            background: var(--light-bg);
+        }
+
+        .small-label {
+            color: var(--sky-dark);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .section-subtitle {
+            color: var(--text-gray);
+            max-width: 700px;
+            margin: 0 auto 50px;
+            line-height: 1.8;
+        }
+
+        /* =========================
+           SEARCH
+        ========================== */
+
+        .search-wrapper {
+            margin-top: -60px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .search-card {
+            background: white;
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: 0 15px 45px rgba(15, 23, 42, 0.13);
+        }
+
+        .search-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #475569;
+        }
+
+        .form-control,
+        .form-select {
+            min-height: 50px;
+            border: 1px solid #dbeafe;
+            border-radius: 10px;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: var(--sky-blue);
+            box-shadow: 0 0 0 0.2rem rgba(56, 189, 248, 0.15);
+        }
+
+        .search-btn {
+            min-height: 50px;
+            border: none;
+            border-radius: 10px;
+            background: var(--sky-dark);
+            color: white;
+            font-weight: 700;
+            width: 100%;
+        }
+
+        .search-btn:hover {
+            background: #0369a1;
+        }
+
+        /* =========================
+           DESTINATION CARDS
+        ========================== */
+
+        .destination-card {
+            position: relative;
+            height: 390px;
+            border-radius: 20px;
+            overflow: hidden;
+            background: #0f172a;
+            transition: 0.35s;
+        }
+
+        .destination-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 18px 40px rgba(15, 23, 42, 0.15);
+        }
+
+        .destination-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+
+        .destination-card:hover .destination-image {
+            transform: scale(1.08);
+        }
+
+        .destination-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: flex-end;
+            padding: 28px;
+
+            background:
+                linear-gradient(
+                    transparent 25%,
+                    rgba(15, 23, 42, 0.9)
+                );
+        }
+
+        .destination-info {
+            color: white;
+            width: 100%;
+        }
+
+        .destination-country {
+            color: #bae6fd;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .destination-info h3 {
+            font-size: 1.65rem;
+            font-weight: 800;
+            margin-bottom: 7px;
+        }
+
+        .destination-info p {
+            color: #e2e8f0;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .destination-link {
+            display: inline-block;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        .destination-link:hover {
+            background: white;
+            color: var(--sky-dark);
+        }
+
+        /* =========================
+           FEATURE DESTINATION
+        ========================== */
+
+        .feature-destination {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 12px 35px rgba(15, 23, 42, 0.08);
+        }
+
+        .feature-destination img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+        }
+
+        .feature-content {
+            padding: 45px;
+        }
+
+        .feature-content h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 18px;
+        }
+
+        .feature-content p {
+            color: var(--text-gray);
+            line-height: 1.9;
+            margin-bottom: 20px;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 25px 0;
+        }
+
+        .feature-list li {
+            margin-bottom: 14px;
+            font-weight: 600;
+        }
+
+        .feature-list i {
+            color: var(--sky-dark);
+            margin-right: 9px;
+        }
+
+        .feature-btn {
+            display: inline-block;
+            background: var(--sky-dark);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 700;
+        }
+
+        .feature-btn:hover {
+            background: #0369a1;
+            color: white;
+        }
+
+        /* =========================
+           REGION CARDS
+        ========================== */
+
+        .region-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 18px;
+            padding: 30px;
+            height: 100%;
+            transition: 0.3s;
+        }
+
+        .region-card:hover {
+            transform: translateY(-6px);
+            border-color: #bae6fd;
+            box-shadow: 0 15px 35px rgba(15, 23, 42, 0.08);
+        }
+
+        .region-icon {
+            width: 58px;
+            height: 58px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 15px;
+            background: var(--sky-light);
+            color: var(--sky-dark);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .region-card h4 {
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .region-card p {
+            color: var(--text-gray);
+            line-height: 1.7;
+            margin-bottom: 18px;
+        }
+
+        .region-link {
+            color: var(--sky-dark);
+            font-weight: 700;
+        }
+
+        /* =========================
+           TRAVEL TIPS
+        ========================== */
+
+        .tip-card {
+            background: white;
+            border-radius: 18px;
+            padding: 30px;
+            height: 100%;
+            border: 1px solid #e2e8f0;
+        }
+
+        .tip-number {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--sky-dark);
+            color: white;
+            font-weight: 800;
+            margin-bottom: 18px;
+        }
+
+        .tip-card h5 {
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .tip-card p {
+            color: var(--text-gray);
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        /* =========================
+           CTA
+        ========================== */
+
+        .cta {
+            background: linear-gradient(
+                135deg,
+                #e0f2fe,
+                #f8fbff
+            );
+            border-radius: 25px;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .cta p {
+            color: var(--text-gray);
+            max-width: 650px;
+            margin: 0 auto 25px;
+            line-height: 1.8;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: var(--sky-dark);
+            color: white;
+            padding: 13px 28px;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        .cta-btn:hover {
+            background: #0369a1;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            padding: 65px 0 25px;
+        }
+
+        .footer-brand {
+            font-size: 1.5rem;
+            color: white;
+            font-weight: 800;
+            margin-bottom: 18px;
+        }
+
+        .footer-brand i {
+            color: var(--sky-blue);
+            margin-right: 7px;
+        }
+
+        footer p {
+            color: #94a3b8;
+            line-height: 1.8;
+        }
+
+        footer h5 {
+            color: white;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        footer ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        footer ul li {
+            margin-bottom: 10px;
+            color: #94a3b8;
+        }
+
+        footer ul li a {
+            color: #94a3b8;
+            transition: 0.3s;
+        }
+
+        footer ul li a:hover {
+            color: var(--sky-blue);
+        }
+
+        .social-link {
+            display: inline-flex;
+            width: 40px;
+            height: 40px;
+            align-items: center;
+            justify-content: center;
+            background: #1e293b;
+            color: white;
+            border-radius: 50%;
+            margin-right: 7px;
+            transition: 0.3s;
+        }
+
+        .social-link:hover {
+            background: var(--sky-dark);
+            color: white;
+        }
+
+        .copyright {
+            border-top: 1px solid #1e293b;
+            margin-top: 40px;
+            padding-top: 22px;
+            color: #64748b;
+            text-align: center;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================== */
+
+        @media (max-width: 991px) {
+
+            .nav-link {
+                margin-left: 0;
+                padding: 10px 0;
+            }
+
+            .nav-contact {
+                display: inline-block;
+                margin-top: 8px;
+            }
+
+            .feature-content {
+                padding: 35px;
+            }
+        }
+
+        @media (max-width: 767px) {
+
+            .page-hero {
+                min-height: 430px;
+            }
+
+            .page-hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .section {
+                padding: 65px 0;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .search-wrapper {
+                margin-top: -35px;
+            }
+
+            .destination-card {
+                height: 340px;
+            }
+
+            .feature-destination img {
+                height: 320px;
+            }
+
+            .feature-content {
+                padding: 30px 25px;
+            }
+
+            .feature-content h2 {
+                font-size: 2rem;
+            }
+
+            .cta {
+                padding: 45px 20px;
+            }
+
+            .cta h2 {
+                font-size: 2rem;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+========================== -->
+
+<nav class="navbar navbar-expand-lg sticky-top">
+
+    <div class="container">
+
+        <a class="navbar-brand" href="index.html">
+            <i class="bi bi-airplane-fill"></i>
+            SkyBlue Airport
+        </a>
+
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#mainNavbar"
+            aria-controls="mainNavbar"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainNavbar">
+
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">
+                        Home
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="flight.html">
+                        Flights
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="services.html">
+                        Services
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="destinations.html">
+                        Destinations
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">
+                        About
+                    </a>
+                </li>
+
+                <li class="nav-item ms-lg-2">
+                    <a class="nav-link nav-contact" href="#contact">
+                        Contact
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<!-- =========================
+     HERO
+========================== -->
+
+<section class="page-hero">
+
+    <div class="container">
+
+        <div class="hero-content">
+
+            <span class="hero-badge">
+                <i class="bi bi-globe-americas me-2"></i>
+                Explore The World
+            </span>
+
+            <h1>
+                Discover Your Next Destination
+            </h1>
+
+            <p>
+                From vibrant modern cities to historic landmarks
+                and beautiful beaches, explore destinations connected
+                through SkyBlue International Airport.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     DESTINATION SEARCH
+========================== -->
+
+<section class="search-wrapper">
+
+    <div class="container">
+
+        <div class="search-card">
+
+            <div class="search-title">
+                <i class="bi bi-search me-2 text-info"></i>
+                Find Your Destination
+            </div>
+
+            <form>
+
+                <div class="row g-3 align-items-end">
+
+                    <div class="col-lg-4 col-md-6">
+
+                        <label class="form-label">
+                            Search City
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            placeholder="e.g. Dubai, Paris..."
+                        >
+
+                    </div>
+
+
+                    <div class="col-lg-3 col-md-6">
+
+                        <label class="form-label">
+                            Region
+                        </label>
+
+                        <select class="form-select">
+
+                            <option selected>
+                                All Regions
+                            </option>
+
+                            <option>
+                                Europe
+                            </option>
+
+                            <option>
+                                Asia
+                            </option>
+
+                            <option>
+                                Middle East
+                            </option>
+
+                            <option>
+                                North America
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="col-lg-3 col-md-6">
+
+                        <label class="form-label">
+                            Destination Type
+                        </label>
+
+                        <select class="form-select">
+
+                            <option selected>
+                                All Types
+                            </option>
+
+                            <option>
+                                City
+                            </option>
+
+                            <option>
+                                Beach
+                            </option>
+
+                            <option>
+                                Business
+                            </option>
+
+                            <option>
+                                Cultural
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="col-lg-2 col-md-6">
+
+                        <button
+                            type="button"
+                            class="search-btn"
+                            onclick="searchDestination()"
+                        >
+                            <i class="bi bi-search me-2"></i>
+                            Search
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     POPULAR DESTINATIONS
+========================== -->
+
+<section class="section">
+
+    <div class="container">
+
+        <div class="text-center">
+
+            <div class="small-label">
+                Popular Destinations
+            </div>
+
+            <h2 class="section-title">
+                Where Will You Go?
+            </h2>
+
+            <p class="section-subtitle">
+                Discover some of the most popular destinations
+                for business, culture, shopping and unforgettable
+                travel experiences.
+            </p>
+
+        </div>
+
+
+        <div class="row g-4">
+
+
+            <!-- Dubai -->
+
+            <div class="col-lg-4 col-md-6 destination-item">
+
+                <div class="destination-card">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=1000&q=85"
+                        alt="Dubai"
+                        class="destination-image"
+                    >
+
+                    <div class="destination-overlay">
+
+                        <div class="destination-info">
+
+                            <div class="destination-country">
+                                United Arab Emirates
+                            </div>
+
+                            <h3>
+                                Dubai
+                            </h3>
+
+                            <p>
+                                Luxury, shopping, modern architecture
+                                and unforgettable experiences.
+                            </p>
+
+                            <a href="#dubai" class="destination-link">
+                                Explore Dubai
+                                <i class="bi bi-arrow-right ms-1"></i>
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Paris -->
+
+            <div class="col-lg-4 col-md-6 destination-item">
+
+                <div class="destination-card">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1000&q=85"
+                        alt="Paris"
+                        class="destination-image"
+                    >
+
+                    <div class="destination-overlay">
+
+                        <div class="destination-info">
+
+                            <div class="destination-country">
+                                France
+                            </div>
+
+                            <h3>
+                                Paris
+                            </h3>
+
+                            <p>
+                                Art, culture, history and iconic
+                                European landmarks.
+                            </p>
+
+                            <a href="#paris" class="destination-link">
+                                Explore Paris
+                                <i class="bi bi-arrow-right ms-1"></i>
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Istanbul -->
+
+            <div class="col-lg-4 col-md-6 destination-item">
+
+                <div class="destination-card">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1000&q=85"
+                        alt="Istanbul"
+                        class="destination-image"
+                    >
+
+                    <div class="destination-overlay">
+
+                        <div class="destination-info">
+
+                            <div class="destination-country">
+                                Türkiye
+                            </div>
+
+                            <h3>
+                                Istanbul
+                            </h3>
+
+                            <p>
+                                A unique meeting point of European
+                                and Asian cultures.
+                            </p>
+
+                            <a href="#istanbul" class="destination-link">
+                                Explore Istanbul
+                                <i class="bi bi-arrow-right ms-1"></i>
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- London -->
+
+            <div class="col-lg-4 col-md-6 destination-item">
+
+                <div class="destination-card">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1000&q=85"
+                        alt="London"
+                        class="destination-image"
+                    >
+
+                    <div class="destination-overlay">
+
+                        <div class="destination-info">
+
+                            <div class="destination-country">
+                                United Kingdom
+                            </div>
+
+                            <h3>
+                                London
+                            </h3>
+
+                            <p>
+                                Historic landmarks, culture and
+                                a vibrant international atmosphere.
+                            </p>
+
+                            <a href="#london" class="destination-link">
+                                Explore London
+                                <i class="bi bi-arrow-right ms-1"></i>
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Singapore -->
+
+            <div class="col-lg-4 col-md-6 destination-item">
+
+                <div class="destination-card">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1000&q=85"
+                        alt="Singapore"
+                        class="destination-image"
+                    >
+
+                    <div class="destination-overlay">
+
+                        <div class="destination-info">
+
+                            <div class="destination-country">
+                                Singapore
+                            </div>
+
+                            <h3>
+                                Singapore
+                            </h3>
+
+                            <p>
+                                Modern city life, incredible food,
+                                technology and green spaces.
+                            </p>
+
+                            <a href="#singapore" class="destination-link">
+                                Explore Singapore
+                                <i class="bi bi-arrow-right ms-1"></i>
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- New York -->
+
+            <div class="col-lg-4 col-md-6 destination-item">
+
+                <div class="destination-card">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?auto=format&fit=crop&w=1000&q=85"
+                        alt="New York"
+                        class="destination-image"
+                    >
+
+                    <div class="destination-overlay">
+
+                        <div class="destination-info">
+
+                            <div class="destination-country">
+                                United States
+                            </div>
+
+                            <h3>
+                                New York
+                            </h3>
+
+                            <p>
+                                A global city famous for business,
+                                entertainment and iconic sights.
+                            </p>
+
+                            <a href="#newyork" class="destination-link">
+                                Explore New York
+                                <i class="bi bi-arrow-right ms-1"></i>
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     FEATURE DESTINATION
+========================== -->
+
+<section class="section section-light" id="dubai">
+
+    <div class="container">
+
+        <div class="feature-destination">
+
+            <div class="row g-0 align-items-center">
+
+                <div class="col-lg-6">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=1200&q=85"
+                        alt="Dubai skyline"
+                    >
+
+                </div>
+
+
+                <div class="col-lg-6">
+
+                    <div class="feature-content">
+
+                        <div class="small-label">
+                            Featured Destination
+                        </div>
+
+                        <h2>
+                            Dubai
+                        </h2>
+
+                        <p>
+                            Discover a city where futuristic
+                            architecture, luxury shopping,
+                            world-class dining and cultural
+                            experiences come together.
+                        </p>
+
+                        <p>
+                            Dubai is a popular destination for
+                            both business travelers and tourists,
+                            offering experiences for every type
+                            of traveler.
+                        </p>
+
+                        <ul class="feature-list">
+
+                            <li>
+                                <i class="bi bi-check-circle-fill"></i>
+                                World-famous architecture
+                            </li>
+
+                            <li>
+                                <i class="bi bi-check-circle-fill"></i>
+                                Luxury shopping experiences
+                            </li>
+
+                            <li>
+                                <i class="bi bi-check-circle-fill"></i>
+                                International dining
+                            </li>
+
+                            <li>
+                                <i class="bi bi-check-circle-fill"></i>
+                                Desert and outdoor adventures
+                            </li>
+
+                        </ul>
+
+                        <a href="flights.html" class="feature-btn">
+                            Find Flights
+                            <i class="bi bi-arrow-right ms-2"></i>
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     REGIONS
+========================== -->
+
+<section class="section">
+
+    <div class="container">
+
+        <div class="text-center">
+
+            <div class="small-label">
+                Travel By Region
+            </div>
+
+            <h2 class="section-title">
+                Explore The World
+            </h2>
+
+            <p class="section-subtitle">
+                Choose a region and discover destinations
+                that match your travel plans.
+            </p>
+
+        </div>
+
+
+        <div class="row g-4">
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="region-card">
+
+                    <div class="region-icon">
+                        <i class="bi bi-building"></i>
+                    </div>
+
+                    <h4>
+                        Europe
+                    </h4>
+
+                    <p>
+                        Discover historic cities, famous landmarks,
+                        art and unforgettable European culture.
+                    </p>
+
+                    <a href="#" class="region-link">
+                        Explore Europe
+                        <i class="bi bi-arrow-right ms-1"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="region-card">
+
+                    <div class="region-icon">
+                        <i class="bi bi-brightness-high"></i>
+                    </div>
+
+                    <h4>
+                        Middle East
+                    </h4>
+
+                    <p>
+                        Experience modern cities, rich traditions,
+                        beautiful deserts and unique hospitality.
+                    </p>
+
+                    <a href="#" class="region-link">
+                        Explore Middle East
+                        <i class="bi bi-arrow-right ms-1"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="region-card">
+
+                    <div class="region-icon">
+                        <i class="bi bi-globe-asia-australia"></i>
+                    </div>
+
+                    <h4>
+                        Asia
+                    </h4>
+
+                    <p>
+                        Explore vibrant cities, ancient traditions,
+                        amazing food and beautiful landscapes.
+                    </p>
+
+                    <a href="#" class="region-link">
+                        Explore Asia
+                        <i class="bi bi-arrow-right ms-1"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="region-card">
+
+                    <div class="region-icon">
+                        <i class="bi bi-buildings"></i>
+                    </div>
+
+                    <h4>
+                        North America
+                    </h4>
+
+                    <p>
+                        Discover iconic cities, modern attractions
+                        and diverse travel experiences.
+                    </p>
+
+                    <a href="#" class="region-link">
+                        Explore North America
+                        <i class="bi bi-arrow-right ms-1"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     TRAVEL TIPS
+========================== -->
+
+<section class="section section-light">
+
+    <div class="container">
+
+        <div class="text-center">
+
+            <div class="small-label">
+                Travel Smart
+            </div>
+
+            <h2 class="section-title">
+                Before You Travel
+            </h2>
+
+            <p class="section-subtitle">
+                A few simple tips can help make your airport
+                and travel experience smoother.
+            </p>
+
+        </div>
+
+
+        <div class="row g-4">
+
+            <div class="col-lg-4">
+
+                <div class="tip-card">
+
+                    <div class="tip-number">
+                        01
+                    </div>
+
+                    <h5>
+                        Check Your Flight
+                    </h5>
+
+                    <p>
+                        Check your flight status before leaving
+                        for the airport to stay updated about
+                        your departure time.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-4">
+
+                <div class="tip-card">
+
+                    <div class="tip-number">
+                        02
+                    </div>
+
+                    <h5>
+                        Arrive Early
+                    </h5>
+
+                    <p>
+                        Give yourself enough time for check-in,
+                        security screening and boarding.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-4">
+
+                <div class="tip-card">
+
+                    <div class="tip-number">
+                        03
+                    </div>
+
+                    <h5>
+                        Prepare Your Documents
+                    </h5>
+
+                    <p>
+                        Keep your passport, travel documents
+                        and boarding information easily accessible.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     CTA
+========================== -->
+
+<section class="section">
+
+    <div class="container">
+
+        <div class="cta">
+
+            <div class="small-label">
+                Ready To Travel?
+            </div>
+
+            <h2>
+                Your Destination Is Waiting
+            </h2>
+
+            <p>
+                Explore our destinations and check available
+                flight information to start planning your next
+                journey.
+            </p>
+
+            <a href="flights.html" class="cta-btn">
+                Check Flight Information
+                <i class="bi bi-arrow-right ms-2"></i>
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================== -->
+
+<footer id="contact">
+
+    <div class="container">
+
+        <div class="row g-5">
+
+            <div class="col-lg-4">
+
+                <div class="footer-brand">
+                    <i class="bi bi-airplane-fill"></i>
+                    SkyBlue Airport
+                </div>
+
+                <p>
+                    Your modern gateway to the world.
+                    We are committed to making every journey
+                    simple, comfortable and memorable.
+                </p>
+
+                <div class="mt-4">
+
+                    <a href="#" class="social-link">
+                        <i class="bi bi-facebook"></i>
+                    </a>
+
+                    <a href="#" class="social-link">
+                        <i class="bi bi-instagram"></i>
+                    </a>
+
+                    <a href="#" class="social-link">
+                        <i class="bi bi-twitter-x"></i>
+                    </a>
+
+                    <a href="#" class="social-link">
+                        <i class="bi bi-youtube"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-6 col-lg-2">
+
+                <h5>
+                    Airport
+                </h5>
+
+                <ul>
+
+                    <li>
+                        <a href="index.html">
+                            Home
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="flights.html">
+                            Flights
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="services.html">
+                            Services
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="destinations.html">
+                            Destinations
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <div class="col-6 col-lg-2">
+
+                <h5>
+                    Information
+                </h5>
+
+                <ul>
+
+                    <li>
+                        <a href="about.html">
+                            About Us
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="flights.html">
+                            Flight Status
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="services.html">
+                            Airport Guide
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#contact">
+                            Contact
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <div class="col-lg-4">
+
+                <h5>
+                    Contact Us
+                </h5>
+
+                <ul>
+
+                    <li>
+                        <i class="bi bi-geo-alt me-2"></i>
+                        SkyBlue International Airport
+                    </li>
+
+                    <li>
+                        <i class="bi bi-telephone me-2"></i>
+                        +1 800 555 2025
+                    </li>
+
+                    <li>
+                        <i class="bi bi-envelope me-2"></i>
+                        info@skyblueairport.com
+                    </li>
+
+                    <li>
+                        <i class="bi bi-clock me-2"></i>
+                        Open 24 Hours
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+
+        <div class="copyright">
+
+            © 2025 SkyBlue International Airport.
+            All Rights Reserved.
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- =========================
+     JAVASCRIPT
+========================== -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+<script>
+
+    function searchDestination() {
+
+        const searchInput =
+            document.querySelector(
+                'input[placeholder="e.g. Dubai, Paris..."]'
+            );
+
+        const searchValue =
+            searchInput.value.toLowerCase().trim();
+
+        const destinationItems =
+            document.querySelectorAll(".destination-item");
+
+        if (searchValue === "") {
+
+            destinationItems.forEach(function(item) {
+                item.style.display = "";
+            });
+
+            return;
+        }
+
+        destinationItems.forEach(function(item) {
+
+            const text =
+                item.innerText.toLowerCase();
+
+            if (text.includes(searchValue)) {
+                item.style.display = "";
+            } else {
+                item.style.display = "none";
+            }
+
+        });
+
+    }
+
+</script>
+
+</body>
+</html>

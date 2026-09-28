@@ -2,86 +2,697 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Flight Information | SkyBlue International Airport</title>
-    <link rel="stylesheet" href="style.css">
 
     <!-- Bootstrap 5 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
 
     <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+        rel="stylesheet">
 
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
+
+    <style>
+
+        /* ================= GENERAL ================= */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background: #f7fbff;
+            color: #17324d;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-weight: 800;
+            color: #17324d;
+            margin-bottom: 12px;
+        }
+
+        .section-subtitle {
+            color: #6b7f91;
+            max-width: 650px;
+            margin: 0 auto 45px;
+        }
+
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            background: #ffffff;
+            box-shadow: 0 2px 15px rgba(0, 123, 255, 0.08);
+        }
+
+        .navbar-brand {
+            color: #008fd5 !important;
+            font-weight: 800;
+            font-size: 1.4rem;
+        }
+
+        .nav-link {
+            color: #17324d !important;
+            font-weight: 500;
+            margin: 0 7px;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: #008fd5 !important;
+        }
+
+
+        /* ================= HERO ================= */
+
+        .flight-hero {
+            min-height: 470px;
+            background:
+                linear-gradient(
+                    rgba(0, 73, 120, 0.78),
+                    rgba(0, 143, 213, 0.72)
+                ),
+                url("https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1800&q=85");
+
+            background-size: cover;
+            background-position: center;
+
+            display: flex;
+            align-items: center;
+            text-align: center;
+
+            color: white;
+        }
+
+        .hero-content {
+            max-width: 850px;
+            margin: auto;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 8px 18px;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.16);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        .flight-hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4.2rem);
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .flight-hero p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            opacity: 0.95;
+        }
+
+
+        /* ================= SEARCH PANEL ================= */
+
+        .search-wrapper {
+            margin-top: -55px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .flight-search {
+            background: white;
+            border-radius: 18px;
+            padding: 30px;
+            box-shadow: 0 15px 45px rgba(0, 75, 120, 0.12);
+        }
+
+        .search-title {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #17324d;
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #38546c;
+            font-size: 0.9rem;
+        }
+
+        .form-control,
+        .form-select {
+            min-height: 48px;
+            border: 1px solid #d9e7f1;
+            border-radius: 10px;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: #008fd5;
+            box-shadow: 0 0 0 0.2rem rgba(0, 143, 213, 0.12);
+        }
+
+        .btn-search {
+            background: #008fd5;
+            color: white;
+            border: none;
+            min-height: 48px;
+            border-radius: 10px;
+            font-weight: 700;
+            padding: 0 25px;
+        }
+
+        .btn-search:hover {
+            background: #0078b5;
+            color: white;
+        }
+
+
+        /* ================= FLIGHT BOARD ================= */
+
+        .flight-board-section {
+            padding: 90px 0 80px;
+        }
+
+        .live-badge {
+            color: #008fd5;
+            font-weight: 800;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .board-container {
+            background: white;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 10px 35px rgba(0, 70, 110, 0.08);
+            border: 1px solid #e7f1f7;
+        }
+
+        .board-header {
+            padding: 22px 28px;
+            background: #f1f9fd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .board-header h3 {
+            margin: 0;
+            font-size: 1.25rem;
+            font-weight: 800;
+        }
+
+        .last-update {
+            color: #71869a;
+            font-size: 0.85rem;
+        }
+
+
+        /* ================= TABS ================= */
+
+        .flight-tabs {
+            border-bottom: 1px solid #e3edf4;
+            padding: 0 25px;
+        }
+
+        .flight-tabs button {
+            border: none;
+            background: transparent;
+            padding: 18px 25px;
+            font-weight: 700;
+            color: #6b7f91;
+            border-bottom: 3px solid transparent;
+        }
+
+        .flight-tabs button.active {
+            color: #008fd5;
+            border-bottom-color: #008fd5;
+        }
+
+
+        /* ================= TABLE ================= */
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        .flight-table {
+            margin: 0;
+            min-width: 850px;
+        }
+
+        .flight-table thead th {
+            background: #ffffff;
+            color: #71869a;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid #e7eef3;
+            padding: 18px 20px;
+            white-space: nowrap;
+        }
+
+        .flight-table tbody td {
+            padding: 20px;
+            vertical-align: middle;
+            border-bottom: 1px solid #edf3f7;
+            color: #314e66;
+        }
+
+        .flight-table tbody tr:hover {
+            background: #f8fcff;
+        }
+
+        .flight-number {
+            font-weight: 800;
+            color: #17324d;
+        }
+
+        .airline {
+            font-weight: 600;
+        }
+
+        .time {
+            font-weight: 800;
+            color: #17324d;
+        }
+
+        .airport-code {
+            color: #71869a;
+            font-size: 0.8rem;
+            margin-left: 5px;
+        }
+
+
+        /* ================= STATUS ================= */
+
+        .status {
+            display: inline-block;
+            padding: 7px 13px;
+            border-radius: 50px;
+            font-size: 0.78rem;
+            font-weight: 700;
+        }
+
+        .status-ontime {
+            background: #e7f8ef;
+            color: #218653;
+        }
+
+        .status-boarding {
+            background: #fff5dc;
+            color: #a56b00;
+        }
+
+        .status-delayed {
+            background: #fff0ee;
+            color: #c84e3d;
+        }
+
+        .status-landed {
+            background: #edf4ff;
+            color: #3b6fb6;
+        }
+
+
+        /* ================= ALERT ================= */
+
+        .airport-alert {
+            margin-top: 25px;
+            padding: 20px 25px;
+            border-radius: 14px;
+            background: #eaf7ff;
+            border-left: 5px solid #008fd5;
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+
+        .airport-alert i {
+            color: #008fd5;
+            font-size: 1.4rem;
+        }
+
+        .airport-alert strong {
+            display: block;
+            margin-bottom: 4px;
+            color: #17324d;
+        }
+
+        .airport-alert p {
+            margin: 0;
+            color: #637b8e;
+            font-size: 0.9rem;
+        }
+
+
+        /* ================= TRACK FLIGHT ================= */
+
+        .tracker-section {
+            background: #eef8fd;
+        }
+
+        .tracker-card {
+            background: white;
+            border-radius: 18px;
+            padding: 40px;
+            box-shadow: 0 10px 35px rgba(0, 70, 110, 0.07);
+        }
+
+        .tracker-icon {
+            width: 65px;
+            height: 65px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #e4f5fc;
+            color: #008fd5;
+            border-radius: 15px;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .tracker-card h3 {
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .tracker-card p {
+            color: #6b7f91;
+            margin-bottom: 25px;
+        }
+
+        .track-input {
+            min-height: 50px;
+        }
+
+        .btn-track {
+            min-height: 50px;
+            background: #008fd5;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 0 25px;
+            font-weight: 700;
+        }
+
+        .btn-track:hover {
+            background: #0078b5;
+            color: white;
+        }
+
+
+        /* ================= BEFORE YOU FLY ================= */
+
+        .info-card {
+            height: 100%;
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid #e5eff5;
+            transition: 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px rgba(0, 90, 130, 0.09);
+        }
+
+        .info-icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 13px;
+            background: #e8f6fc;
+            color: #008fd5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .info-card h5 {
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .info-card p {
+            color: #6b7f91;
+            font-size: 0.92rem;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+
+        /* ================= CTA ================= */
+
+        .cta-section {
+            background:
+                linear-gradient(
+                    135deg,
+                    #007dbd,
+                    #00a2e5
+                );
+
+            color: white;
+            padding: 75px 0;
+        }
+
+        .cta-section h2 {
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .cta-section p {
+            opacity: 0.92;
+            max-width: 650px;
+            margin: 0 auto 25px;
+        }
+
+        .btn-light-custom {
+            background: white;
+            color: #008fd5;
+            border: none;
+            padding: 13px 28px;
+            border-radius: 9px;
+            font-weight: 700;
+        }
+
+        .btn-light-custom:hover {
+            background: #f2faff;
+            color: #0078b5;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #102d45;
+            color: #d8e7f1;
+            padding: 55px 0 25px;
+        }
+
+        .footer-brand {
+            color: white;
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        footer p {
+            color: #a9bfce;
+            line-height: 1.7;
+        }
+
+        .footer-title {
+            color: white;
+            font-weight: 700;
+            margin-bottom: 18px;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #a9bfce;
+            transition: 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .social-icons a {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.08);
+            color: white;
+            margin-right: 7px;
+            transition: 0.2s;
+        }
+
+        .social-icons a:hover {
+            background: #008fd5;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 35px;
+            padding-top: 20px;
+            text-align: center;
+            color: #8fa9ba;
+            font-size: 0.85rem;
+        }
+
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 768px) {
+
+            .section-padding {
+                padding: 60px 0;
+            }
+
+            .flight-hero {
+                min-height: 420px;
+            }
+
+            .flight-search {
+                padding: 22px;
+            }
+
+            .search-wrapper {
+                margin-top: -35px;
+            }
+
+            .tracker-card {
+                padding: 28px;
+            }
+
+            .board-header {
+                padding: 20px;
+            }
+
+            .flight-tabs {
+                padding: 0 10px;
+            }
+
+            .flight-tabs button {
+                padding: 15px;
+            }
+
+        }
+
+    </style>
 
 </head>
+
 
 <body>
 
 
-    <!-- =========================================
-     NAVBAR
-========================================= -->
+    <!-- ================= NAVBAR ================= -->
 
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg sticky-top">
 
         <div class="container">
 
             <a class="navbar-brand" href="index.html">
-
-                <i class="bi bi-airplane-fill"></i>
-
+                <i class="bi bi-airplane-engines-fill me-2"></i>
                 SkyBlue Airport
-
             </a>
 
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
                 <span class="navbar-toggler-icon"></span>
+
             </button>
 
-
-            <div class="collapse navbar-collapse" id="mainNavbar">
+            <div class="collapse navbar-collapse" id="navbarNav">
 
                 <ul class="navbar-nav ms-auto align-items-lg-center">
 
                     <li class="nav-item">
                         <a class="nav-link" href="index.html">
-                            Home
+                            HOME
                         </a>
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link active" href="flights.html">
-                            Flights
+                            FLIGHTS
                         </a>
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link" href="services.html">
-                            Services
+                            SERVICES
                         </a>
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link" href="destinations.html">
-                            Destinations
+                            DESTINATIONS
                         </a>
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link" href="about.html">
-                            About
+                            ABOUT
                         </a>
                     </li>
 
-                    <li class="nav-item ms-lg-3">
-                        <a href="about.html#contact" class="btn btn-sky">
-                            Contact Us
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">
+                            CONTACT
                         </a>
                     </li>
 
@@ -94,54 +705,27 @@
     </nav>
 
 
-    <!-- =========================================
-     HERO
-========================================= -->
+    <!-- ================= HERO ================= -->
 
-    <section class="page-hero">
+    <section class="flight-hero">
 
         <div class="container">
 
             <div class="hero-content">
 
-                <span class="hero-label">
-
-                    <i class="bi bi-airplane"></i>
-
-                    SkyBlue Flight Information
-
+                <span class="hero-badge">
+                    <i class="bi bi-broadcast me-2"></i>
+                    LIVE FLIGHT INFORMATION
                 </span>
-
 
                 <h1>
                     Flight Information
                 </h1>
 
-
                 <p>
-                    Stay informed with the latest arrival and departure
-                    information. Search your flight, check its status,
-                    and plan your journey with confidence.
+                    Check arrivals, departures, flight status and
+                    important airport updates before your journey.
                 </p>
-
-
-                <nav aria-label="breadcrumb">
-
-                    <ol class="breadcrumb">
-
-                        <li class="breadcrumb-item">
-                            <a href="index.html">
-                                Home
-                            </a>
-                        </li>
-
-                        <li class="breadcrumb-item active">
-                            Flights
-                        </li>
-
-                    </ol>
-
-                </nav>
 
             </div>
 
@@ -150,103 +734,86 @@
     </section>
 
 
-    <!-- =========================================
-     SEARCH FLIGHT
-========================================= -->
+    <!-- ================= FLIGHT SEARCH ================= -->
 
     <section class="search-wrapper">
 
         <div class="container">
 
-            <div class="flight-search-card">
+            <div class="flight-search">
 
                 <div class="search-title">
-
-                    <div class="search-title-icon">
-                        <i class="bi bi-search"></i>
-                    </div>
-
-                    <div>
-
-                        <h4>
-                            Find Your Flight
-                        </h4>
-
-                        <p>
-                            Search by flight number, destination or date.
-                        </p>
-
-                    </div>
-
+                    <i class="bi bi-search me-2"></i>
+                    Search for a Flight
                 </div>
 
+                <form id="flightSearchForm">
 
-                <form>
+                    <div class="row g-3 align-items-end">
 
-                    <div class="row g-3">
-
-                        <div class="col-lg-4">
+                        <div class="col-lg-3 col-md-6">
 
                             <label class="form-label">
                                 Flight Number
                             </label>
 
-                            <div class="input-group">
-
-                                <span class="input-group-text bg-white border-end-0">
-                                    <i class="bi bi-airplane text-info"></i>
-                                </span>
-
-                                <input type="text" class="form-control border-start-0" placeholder="e.g. SB 204">
-
-                            </div>
+                            <input
+                                type="text"
+                                id="flightNumber"
+                                class="form-control"
+                                placeholder="e.g. SB102">
 
                         </div>
 
 
-                        <div class="col-lg-3">
+                        <div class="col-lg-3 col-md-6">
 
                             <label class="form-label">
-                                Date
+                                Destination
                             </label>
 
-                            <input type="date" class="form-control">
+                            <select
+                                class="form-select"
+                                id="destination">
 
-                        </div>
-
-
-                        <div class="col-lg-3">
-
-                            <label class="form-label">
-                                Flight Type
-                            </label>
-
-                            <select class="form-select">
-
-                                <option>
-                                    All Flights
+                                <option value="">
+                                    Select destination
                                 </option>
 
-                                <option>
-                                    Arrivals
-                                </option>
-
-                                <option>
-                                    Departures
-                                </option>
+                                <option>Dubai</option>
+                                <option>Paris</option>
+                                <option>Istanbul</option>
+                                <option>London</option>
+                                <option>Singapore</option>
+                                <option>New York</option>
 
                             </select>
 
                         </div>
 
 
-                        <div class="col-lg-2 d-flex align-items-end">
+                        <div class="col-lg-3 col-md-6">
 
-                            <button type="submit" class="btn btn-sky w-100">
+                            <label class="form-label">
+                                Date
+                            </label>
+
+                            <input
+                                type="date"
+                                id="flightDate"
+                                class="form-control">
+
+                        </div>
+
+
+                        <div class="col-lg-3 col-md-6">
+
+                            <button
+                                type="submit"
+                                class="btn btn-search w-100">
 
                                 <i class="bi bi-search me-2"></i>
-
-                                Search
+                                Search Flight
 
                             </button>
 
@@ -263,197 +830,78 @@
     </section>
 
 
-    <!-- =========================================
-     QUICK INFORMATION
-========================================= -->
+    <!-- ================= FLIGHT BOARD ================= -->
 
-    <section class="section">
+    <section class="flight-board-section">
 
         <div class="container">
 
-            <div class="section-heading">
+            <div class="text-center mb-5">
 
-                <span>
-                    Flight Center
-                </span>
+                <div class="live-badge">
+                    <i class="bi bi-circle-fill me-2"></i>
+                    LIVE FLIGHT BOARD
+                </div>
 
-                <h2>
-                    Plan Your Journey
+                <h2 class="section-title">
+                    Today's Flight Schedule
                 </h2>
 
-                <p>
-                    Everything you need to know before your flight,
-                    all in one place.
+                <p class="section-subtitle">
+                    Stay updated with the latest arrival and departure
+                    information at SkyBlue International Airport.
                 </p>
 
             </div>
 
 
-            <div class="row g-4">
+            <div class="board-container">
 
-                <!-- Arrivals -->
+                <!-- Board Header -->
 
-                <div class="col-md-6 col-lg-4">
+                <div class="board-header">
 
-                    <div class="flight-info-card">
+                    <h3>
+                        Flight Status
+                    </h3>
 
-                        <div class="flight-info-icon">
-
-                            <i class="bi bi-box-arrow-in-down"></i>
-
-                        </div>
-
-                        <h5>
-                            Arrivals
-                        </h5>
-
-                        <p>
-                            Check incoming flights, arrival times,
-                            baggage information and terminal details.
-                        </p>
-
-                        <a href="#arrivals" class="flight-info-link">
-
-                            View Arrivals
-
-                            <i class="bi bi-arrow-right ms-1"></i>
-
-                        </a>
-
+                    <div class="last-update">
+                        <i class="bi bi-clock me-1"></i>
+                        Last updated: Just now
                     </div>
 
                 </div>
 
 
-                <!-- Departures -->
+                <!-- Tabs -->
 
-                <div class="col-md-6 col-lg-4">
+                <div class="flight-tabs">
 
-                    <div class="flight-info-card">
+                    <button
+                        class="active"
+                        onclick="showFlights('departures', this)">
 
-                        <div class="flight-info-icon">
+                        <i class="bi bi-airplane-engines me-2"></i>
+                        Departures
 
-                            <i class="bi bi-box-arrow-up-right"></i>
+                    </button>
 
-                        </div>
+                    <button
+                        onclick="showFlights('arrivals', this)">
 
-                        <h5>
-                            Departures
-                        </h5>
+                        <i class="bi bi-airplane me-2"></i>
+                        Arrivals
 
-                        <p>
-                            Find departure times, boarding gates,
-                            terminals and real-time flight status.
-                        </p>
-
-                        <a href="#departures" class="flight-info-link">
-
-                            View Departures
-
-                            <i class="bi bi-arrow-right ms-1"></i>
-
-                        </a>
-
-                    </div>
+                    </button>
 
                 </div>
 
 
-                <!-- Schedule -->
-
-                <div class="col-md-6 col-lg-4">
-
-                    <div class="flight-info-card">
-
-                        <div class="flight-info-icon">
-
-                            <i class="bi bi-calendar3"></i>
-
-                        </div>
-
-                        <h5>
-                            Flight Schedule
-                        </h5>
-
-                        <p>
-                            Explore scheduled flights and plan your
-                            travel around convenient departure times.
-                        </p>
-
-                        <a href="#schedule" class="flight-info-link">
-
-                            View Schedule
-
-                            <i class="bi bi-arrow-right ms-1"></i>
-
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================================
-     FLIGHT STATUS
-========================================= -->
-
-    <section class="section section-light" id="schedule">
-
-        <div class="container">
-
-            <div class="section-heading">
-
-                <span>
-                    Live Flight Status
-                </span>
-
-                <h2>
-                    Today's Flights
-                </h2>
-
-                <p>
-                    Follow the latest flight information from
-                    SkyBlue International Airport.
-                </p>
-
-            </div>
-
-
-            <!-- Tabs -->
-
-            <div class="flight-tabs">
-
-                <button class="active">
-                    <i class="bi bi-airplane me-2"></i>
-                    All Flights
-                </button>
-
-                <button>
-                    <i class="bi bi-box-arrow-in-down me-2"></i>
-                    Arrivals
-                </button>
-
-                <button>
-                    <i class="bi bi-box-arrow-up-right me-2"></i>
-                    Departures
-                </button>
-
-            </div>
-
-
-            <!-- Table -->
-
-            <div class="table-container">
+                <!-- Flight Table -->
 
                 <div class="table-responsive">
 
-                    <table class="table flight-table mb-0">
+                    <table class="table flight-table">
 
                         <thead>
 
@@ -468,15 +916,11 @@
                                 </th>
 
                                 <th>
-                                    From / To
+                                    Destination
                                 </th>
 
                                 <th>
-                                    Time
-                                </th>
-
-                                <th>
-                                    Terminal
+                                    Scheduled
                                 </th>
 
                                 <th>
@@ -492,40 +936,33 @@
                         </thead>
 
 
-                        <tbody>
-
-                            <!-- Flight 1 -->
+                        <tbody id="flightTableBody">
 
                             <tr>
 
-                                <td class="flight-number">
-                                    SB 204
+                                <td>
+                                    <span class="flight-number">
+                                        SB102
+                                    </span>
                                 </td>
 
                                 <td>
-
-                                    <div class="airline-name">
-
-                                        <div class="airline-icon">
-                                            <i class="bi bi-airplane"></i>
-                                        </div>
-
+                                    <span class="airline">
                                         SkyBlue Airlines
-
-                                    </div>
-
+                                    </span>
                                 </td>
 
                                 <td>
                                     Dubai
+                                    <span class="airport-code">
+                                        DXB
+                                    </span>
                                 </td>
 
                                 <td>
-                                    08:45 AM
-                                </td>
-
-                                <td>
-                                    T1
+                                    <span class="time">
+                                        08:30
+                                    </span>
                                 </td>
 
                                 <td>
@@ -533,48 +970,39 @@
                                 </td>
 
                                 <td>
-
-                                    <span class="status status-on-time">
+                                    <span class="status status-ontime">
                                         On Time
                                     </span>
-
                                 </td>
 
                             </tr>
 
 
-                            <!-- Flight 2 -->
-
                             <tr>
 
-                                <td class="flight-number">
-                                    SB 318
+                                <td>
+                                    <span class="flight-number">
+                                        SB215
+                                    </span>
                                 </td>
 
                                 <td>
-
-                                    <div class="airline-name">
-
-                                        <div class="airline-icon">
-                                            <i class="bi bi-airplane"></i>
-                                        </div>
-
+                                    <span class="airline">
                                         SkyBlue Airlines
-
-                                    </div>
-
+                                    </span>
                                 </td>
 
                                 <td>
-                                    London
+                                    Paris
+                                    <span class="airport-code">
+                                        CDG
+                                    </span>
                                 </td>
 
                                 <td>
-                                    10:20 AM
-                                </td>
-
-                                <td>
-                                    T1
+                                    <span class="time">
+                                        09:45
+                                    </span>
                                 </td>
 
                                 <td>
@@ -582,207 +1010,129 @@
                                 </td>
 
                                 <td>
-
                                     <span class="status status-boarding">
                                         Boarding
                                     </span>
-
                                 </td>
 
                             </tr>
 
 
-                            <!-- Flight 3 -->
-
                             <tr>
 
-                                <td class="flight-number">
-                                    SB 452
+                                <td>
+                                    <span class="flight-number">
+                                        SB318
+                                    </span>
                                 </td>
 
                                 <td>
-
-                                    <div class="airline-name">
-
-                                        <div class="airline-icon">
-                                            <i class="bi bi-airplane"></i>
-                                        </div>
-
+                                    <span class="airline">
                                         SkyBlue Airlines
-
-                                    </div>
-
+                                    </span>
                                 </td>
 
                                 <td>
                                     Istanbul
-                                </td>
-
-                                <td>
-                                    01:15 PM
-                                </td>
-
-                                <td>
-                                    T2
-                                </td>
-
-                                <td>
-                                    C21
-                                </td>
-
-                                <td>
-
-                                    <span class="status status-on-time">
-                                        On Time
+                                    <span class="airport-code">
+                                        IST
                                     </span>
-
-                                </td>
-
-                            </tr>
-
-
-                            <!-- Flight 4 -->
-
-                            <tr>
-
-                                <td class="flight-number">
-                                    SB 591
                                 </td>
 
                                 <td>
-
-                                    <div class="airline-name">
-
-                                        <div class="airline-icon">
-                                            <i class="bi bi-airplane"></i>
-                                        </div>
-
-                                        SkyBlue Airlines
-
-                                    </div>
-
+                                    <span class="time">
+                                        11:20
+                                    </span>
                                 </td>
 
                                 <td>
-                                    Paris
+                                    C05
                                 </td>
 
                                 <td>
-                                    04:40 PM
-                                </td>
-
-                                <td>
-                                    T2
-                                </td>
-
-                                <td>
-                                    D05
-                                </td>
-
-                                <td>
-
                                     <span class="status status-delayed">
                                         Delayed
                                     </span>
-
                                 </td>
 
                             </tr>
 
 
-                            <!-- Flight 5 -->
-
                             <tr>
 
-                                <td class="flight-number">
-                                    SB 675
+                                <td>
+                                    <span class="flight-number">
+                                        SB427
+                                    </span>
                                 </td>
 
                                 <td>
-
-                                    <div class="airline-name">
-
-                                        <div class="airline-icon">
-                                            <i class="bi bi-airplane"></i>
-                                        </div>
-
+                                    <span class="airline">
                                         SkyBlue Airlines
+                                    </span>
+                                </td>
 
-                                    </div>
+                                <td>
+                                    London
+                                    <span class="airport-code">
+                                        LHR
+                                    </span>
+                                </td>
 
+                                <td>
+                                    <span class="time">
+                                        13:10
+                                    </span>
+                                </td>
+
+                                <td>
+                                    A06
+                                </td>
+
+                                <td>
+                                    <span class="status status-ontime">
+                                        On Time
+                                    </span>
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+
+                                <td>
+                                    <span class="flight-number">
+                                        SB536
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <span class="airline">
+                                        SkyBlue Airlines
+                                    </span>
                                 </td>
 
                                 <td>
                                     Singapore
+                                    <span class="airport-code">
+                                        SIN
+                                    </span>
                                 </td>
 
                                 <td>
-                                    06:25 PM
+                                    <span class="time">
+                                        16:25
+                                    </span>
                                 </td>
 
                                 <td>
-                                    T1
+                                    B14
                                 </td>
 
                                 <td>
-                                    A18
-                                </td>
-
-                                <td>
-
-                                    <span class="status status-on-time">
+                                    <span class="status status-ontime">
                                         On Time
                                     </span>
-
-                                </td>
-
-                            </tr>
-
-
-                            <!-- Flight 6 -->
-
-                            <tr>
-
-                                <td class="flight-number">
-                                    SB 721
-                                </td>
-
-                                <td>
-
-                                    <div class="airline-name">
-
-                                        <div class="airline-icon">
-                                            <i class="bi bi-airplane"></i>
-                                        </div>
-
-                                        SkyBlue Airlines
-
-                                    </div>
-
-                                </td>
-
-                                <td>
-                                    Paris
-                                </td>
-
-                                <td>
-                                    08:15 PM
-                                </td>
-
-                                <td>
-                                    T2
-                                </td>
-
-                                <td>
-                                    C14
-                                </td>
-
-                                <td>
-
-                                    <span class="status status-cancelled">
-                                        Cancelled
-                                    </span>
-
                                 </td>
 
                             </tr>
@@ -795,161 +1145,101 @@
 
             </div>
 
+
+            <!-- Airport Alert -->
+
+            <div class="airport-alert">
+
+                <i class="bi bi-info-circle-fill"></i>
+
+                <div>
+
+                    <strong>
+                        Airport Information
+                    </strong>
+
+                    <p>
+                        Please arrive at least 3 hours before your
+                        international flight and 2 hours before your
+                        domestic flight.
+                    </p>
+
+                </div>
+
+            </div>
+
         </div>
 
     </section>
 
 
-    <!-- =========================================
-     FLIGHT TRACKER
-========================================= -->
+    <!-- ================= TRACK FLIGHT ================= -->
 
-    <section class="section">
+    <section class="section-padding tracker-section">
 
         <div class="container">
 
-            <div class="row align-items-stretch">
+            <div class="row justify-content-center">
 
-                <div class="col-lg-7">
+                <div class="col-lg-9">
 
-                    <div class="tracker-card">
+                    <div class="tracker-card text-center">
 
-                        <div class="d-flex justify-content-between align-items-center">
+                        <div class="tracker-icon mx-auto">
 
-                            <div>
-
-                                <h4>
-                                    Flight Tracker
-                                </h4>
-
-                                <p class="mb-0">
-                                    Track your flight journey
-                                    in real time.
-                                </p>
-
-                            </div>
-
-                            <i class="bi bi-broadcast-pin" style="font-size: 35px;"></i>
+                            <i class="bi bi-radar"></i>
 
                         </div>
 
-
-                        <div class="tracker-route">
-
-                            <div>
-
-                                <div class="airport-code">
-                                    SBA
-                                </div>
-
-                                <div class="airport-city">
-                                    SkyBlue Airport
-                                </div>
-
-                            </div>
-
-
-                            <div class="route-line">
-
-                                <div class="route-plane">
-
-                                    <i class="bi bi-airplane-fill"></i>
-
-                                </div>
-
-                            </div>
-
-
-                            <div class="text-end">
-
-                                <div class="airport-code">
-                                    DXB
-                                </div>
-
-                                <div class="airport-city">
-                                    Dubai
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="row g-3">
-
-                            <div class="col-4">
-
-                                <small class="opacity-75">
-                                    Flight
-                                </small>
-
-                                <div class="fw-bold">
-                                    SB 204
-                                </div>
-
-                            </div>
-
-                            <div class="col-4">
-
-                                <small class="opacity-75">
-                                    Departure
-                                </small>
-
-                                <div class="fw-bold">
-                                    08:45 AM
-                                </div>
-
-                            </div>
-
-                            <div class="col-4">
-
-                                <small class="opacity-75">
-                                    Status
-                                </small>
-
-                                <div class="fw-bold">
-                                    On Time
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="col-lg-5">
-
-                    <div class="flight-info-card h-100">
-
-                        <div class="flight-info-icon">
-
-                            <i class="bi bi-info-circle"></i>
-
-                        </div>
-
-                        <h5>
-                            Flight Status Information
-                        </h5>
+                        <h3>
+                            Track Your Flight
+                        </h3>
 
                         <p>
-                            Flight information may change due to
-                            weather conditions, operational requirements,
-                            or other unforeseen circumstances.
+                            Enter your flight number to quickly check
+                            the latest status of your journey.
                         </p>
 
-                        <p>
-                            We recommend checking your flight status
-                            before leaving for the airport.
-                        </p>
 
-                        <a href="#" class="flight-info-link">
-                            Airport Information
-                            <i class="bi bi-arrow-right ms-1"></i>
-                        </a>
+                        <form id="trackForm">
+
+                            <div class="row g-3">
+
+                                <div class="col-md-8">
+
+                                    <input
+                                        type="text"
+                                        id="trackNumber"
+                                        class="form-control track-input"
+                                        placeholder="Enter flight number, e.g. SB102"
+                                        required>
+
+                                </div>
+
+                                <div class="col-md-4">
+
+                                    <button
+                                        type="submit"
+                                        class="btn btn-track w-100">
+
+                                        <i class="bi bi-search me-2"></i>
+                                        Track Flight
+
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </form>
+
+
+                        <div
+                            id="trackResult"
+                            class="mt-4"
+                            style="display:none;">
+
+                        </div>
 
                     </div>
 
@@ -962,27 +1252,21 @@
     </section>
 
 
-    <!-- =========================================
-     TRAVEL TIPS
-========================================= -->
+    <!-- ================= BEFORE YOU FLY ================= -->
 
-    <section class="section section-light">
+    <section class="section-padding">
 
         <div class="container">
 
-            <div class="section-heading">
+            <div class="text-center">
 
-                <span>
-                    Travel Tips
-                </span>
-
-                <h2>
+                <h2 class="section-title">
                     Before You Fly
                 </h2>
 
-                <p>
-                    A few simple tips can make your airport experience
-                    faster and more comfortable.
+                <p class="section-subtitle">
+                    Helpful information to make your airport experience
+                    simple, comfortable and stress-free.
                 </p>
 
             </div>
@@ -990,21 +1274,26 @@
 
             <div class="row g-4">
 
-                <div class="col-md-6 col-lg-3">
 
-                    <div class="tip-card">
+                <!-- Card 1 -->
 
-                        <div class="tip-number">
-                            01
+                <div class="col-lg-4 col-md-6">
+
+                    <div class="info-card">
+
+                        <div class="info-icon">
+
+                            <i class="bi bi-clock-history"></i>
+
                         </div>
 
-                        <h6>
+                        <h5>
                             Arrive Early
-                        </h6>
+                        </h5>
 
                         <p>
-                            Arrive at the airport at least two to three
-                            hours before your international flight.
+                            Give yourself enough time for check-in,
+                            security screening, immigration and boarding.
                         </p>
 
                     </div>
@@ -1012,21 +1301,25 @@
                 </div>
 
 
-                <div class="col-md-6 col-lg-3">
+                <!-- Card 2 -->
 
-                    <div class="tip-card">
+                <div class="col-lg-4 col-md-6">
 
-                        <div class="tip-number">
-                            02
+                    <div class="info-card">
+
+                        <div class="info-icon">
+
+                            <i class="bi bi-passport"></i>
+
                         </div>
 
-                        <h6>
-                            Check Your Documents
-                        </h6>
+                        <h5>
+                            Travel Documents
+                        </h5>
 
                         <p>
-                            Make sure your passport, visa and travel
-                            documents are ready before departure.
+                            Make sure your passport, visa and other
+                            required travel documents are valid and ready.
                         </p>
 
                     </div>
@@ -1034,21 +1327,25 @@
                 </div>
 
 
-                <div class="col-md-6 col-lg-3">
+                <!-- Card 3 -->
 
-                    <div class="tip-card">
+                <div class="col-lg-4 col-md-6">
 
-                        <div class="tip-number">
-                            03
+                    <div class="info-card">
+
+                        <div class="info-icon">
+
+                            <i class="bi bi-bag-check"></i>
+
                         </div>
 
-                        <h6>
-                            Check Your Baggage
-                        </h6>
+                        <h5>
+                            Baggage Information
+                        </h5>
 
                         <p>
-                            Review your airline's baggage allowance
-                            and restrictions before packing.
+                            Check your airline's baggage allowance and
+                            prepare your luggage according to the rules.
                         </p>
 
                     </div>
@@ -1056,21 +1353,77 @@
                 </div>
 
 
-                <div class="col-md-6 col-lg-3">
+                <!-- Card 4 -->
 
-                    <div class="tip-card">
+                <div class="col-lg-4 col-md-6">
 
-                        <div class="tip-number">
-                            04
+                    <div class="info-card">
+
+                        <div class="info-icon">
+
+                            <i class="bi bi-shield-check"></i>
+
                         </div>
 
-                        <h6>
-                            Monitor Your Gate
-                        </h6>
+                        <h5>
+                            Security Screening
+                        </h5>
 
                         <p>
-                            Keep an eye on airport displays for any
-                            changes to your boarding gate.
+                            Follow airport security instructions and keep
+                            liquids and electronic items easily accessible.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Card 5 -->
+
+                <div class="col-lg-4 col-md-6">
+
+                    <div class="info-card">
+
+                        <div class="info-icon">
+
+                            <i class="bi bi-door-open"></i>
+
+                        </div>
+
+                        <h5>
+                            Find Your Gate
+                        </h5>
+
+                        <p>
+                            Check the flight information displays regularly
+                            because boarding gates may change.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Card 6 -->
+
+                <div class="col-lg-4 col-md-6">
+
+                    <div class="info-card">
+
+                        <div class="info-icon">
+
+                            <i class="bi bi-headset"></i>
+
+                        </div>
+
+                        <h5>
+                            Need Assistance?
+                        </h5>
+
+                        <p>
+                            Our airport team is available to help passengers
+                            with questions and special assistance needs.
                         </p>
 
                     </div>
@@ -1084,33 +1437,72 @@
     </section>
 
 
-    <!-- =========================================
-     FOOTER
-========================================= -->
+    <!-- ================= CTA ================= -->
+
+    <section class="cta-section">
+
+        <div class="container text-center">
+
+            <h2>
+                Need More Airport Information?
+            </h2>
+
+            <p>
+                Explore our airport services or contact our team
+                for additional assistance before your journey.
+            </p>
+
+            <a
+                href="services.html"
+                class="btn btn-light-custom me-2">
+
+                Explore Services
+
+            </a>
+
+            <a
+                href="contact.html"
+                class="btn btn-outline-light">
+
+                Contact Us
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
 
     <footer>
 
         <div class="container">
 
-            <div class="row g-5">
+            <div class="row g-4">
 
-                <div class="col-lg-4">
 
-                    <h5>
+                <!-- Brand -->
 
-                        <i class="bi bi-airplane-fill text-info me-2"></i>
+                <div class="col-lg-5">
 
+                    <a
+                        href="index.html"
+                        class="footer-brand">
+
+                        <i class="bi bi-airplane-engines-fill me-2"></i>
                         SkyBlue Airport
 
-                    </h5>
+                    </a>
 
                     <p>
-                        Your gateway to the world. Experience modern
-                        aviation, exceptional service and seamless travel.
+                        Welcome to SkyBlue International Airport —
+                        connecting people, cities and opportunities
+                        around the world.
                     </p>
 
 
-                    <div class="social-links">
+                    <div class="social-icons">
 
                         <a href="#">
                             <i class="bi bi-facebook"></i>
@@ -1133,11 +1525,13 @@
                 </div>
 
 
-                <div class="col-6 col-lg-2">
+                <!-- Quick Links -->
 
-                    <h5>
-                        Airport
-                    </h5>
+                <div class="col-lg-2 col-md-4">
+
+                    <div class="footer-title">
+                        Quick Links
+                    </div>
 
                     <ul class="footer-links">
 
@@ -1170,35 +1564,37 @@
                 </div>
 
 
-                <div class="col-6 col-lg-2">
+                <!-- Airport -->
 
-                    <h5>
-                        Information
-                    </h5>
+                <div class="col-lg-2 col-md-4">
+
+                    <div class="footer-title">
+                        Airport
+                    </div>
 
                     <ul class="footer-links">
 
                         <li>
-                            <a href="#">
-                                Flight Status
+                            <a href="about.html">
+                                About Us
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="contact.html">
+                                Contact
                             </a>
                         </li>
 
                         <li>
                             <a href="#">
-                                Terminals
+                                Airport Map
                             </a>
                         </li>
 
                         <li>
                             <a href="#">
-                                Parking
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="#">
-                                Transport
+                                Careers
                             </a>
                         </li>
 
@@ -1207,34 +1603,27 @@
                 </div>
 
 
-                <div class="col-lg-4">
+                <!-- Contact -->
 
-                    <h5>
-                        Contact Us
-                    </h5>
+                <div class="col-lg-3 col-md-4">
+
+                    <div class="footer-title">
+                        Contact
+                    </div>
 
                     <p class="mb-2">
-
                         <i class="bi bi-geo-alt me-2"></i>
-
-                        Airport Road, Sky City
-
+                        SkyBlue International Airport
                     </p>
 
                     <p class="mb-2">
-
                         <i class="bi bi-telephone me-2"></i>
-
-                        +1 800 555 2025
-
+                        +1 234 567 890
                     </p>
 
-                    <p>
-
+                    <p class="mb-0">
                         <i class="bi bi-envelope me-2"></i>
-
                         info@skyblueairport.com
-
                     </p>
 
                 </div>
@@ -1242,10 +1631,10 @@
             </div>
 
 
-            <div class="copyright text-center">
+            <div class="footer-bottom">
 
-                © 2025 SkyBlue International Airport.
-                All Rights Reserved.
+                © 2026 SkyBlue International Airport.
+                All rights reserved.
 
             </div>
 
@@ -1254,35 +1643,375 @@
     </footer>
 
 
-    <!-- =========================================
-     BOOTSTRAP JS
-========================================= -->
+    <!-- ================= BOOTSTRAP JS ================= -->
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
     </script>
 
 
-    <!-- =========================================
-     SIMPLE FLIGHT TAB SCRIPT
-========================================= -->
+    <!-- ================= JAVASCRIPT ================= -->
 
     <script>
 
-        const flightTabs = document.querySelectorAll(".flight-tabs button");
+        /* ================= FLIGHT DATA ================= */
 
-        flightTabs.forEach(tab => {
+        const departures = [
 
-            tab.addEventListener("click", function () {
+            {
+                flight: "SB102",
+                airline: "SkyBlue Airlines",
+                destination: "Dubai",
+                code: "DXB",
+                time: "08:30",
+                gate: "A12",
+                status: "On Time",
+                statusClass: "status-ontime"
+            },
 
-                flightTabs.forEach(item => {
-                    item.classList.remove("active");
-                });
+            {
+                flight: "SB215",
+                airline: "SkyBlue Airlines",
+                destination: "Paris",
+                code: "CDG",
+                time: "09:45",
+                gate: "B08",
+                status: "Boarding",
+                statusClass: "status-boarding"
+            },
 
-                this.classList.add("active");
+            {
+                flight: "SB318",
+                airline: "SkyBlue Airlines",
+                destination: "Istanbul",
+                code: "IST",
+                time: "11:20",
+                gate: "C05",
+                status: "Delayed",
+                statusClass: "status-delayed"
+            },
+
+            {
+                flight: "SB427",
+                airline: "SkyBlue Airlines",
+                destination: "London",
+                code: "LHR",
+                time: "13:10",
+                gate: "A06",
+                status: "On Time",
+                statusClass: "status-ontime"
+            },
+
+            {
+                flight: "SB536",
+                airline: "SkyBlue Airlines",
+                destination: "Singapore",
+                code: "SIN",
+                time: "16:25",
+                gate: "B14",
+                status: "On Time",
+                statusClass: "status-ontime"
+            }
+
+        ];
+
+
+        const arrivals = [
+
+            {
+                flight: "SB101",
+                airline: "SkyBlue Airlines",
+                destination: "Baku",
+                code: "GYD",
+                time: "08:10",
+                gate: "A03",
+                status: "Landed",
+                statusClass: "status-landed"
+            },
+
+            {
+                flight: "SB214",
+                airline: "SkyBlue Airlines",
+                destination: "Paris",
+                code: "CDG",
+                time: "10:25",
+                gate: "B04",
+                status: "Landed",
+                statusClass: "status-landed"
+            },
+
+            {
+                flight: "SB317",
+                airline: "SkyBlue Airlines",
+                destination: "Istanbul",
+                code: "IST",
+                time: "12:40",
+                gate: "C02",
+                status: "On Time",
+                statusClass: "status-ontime"
+            },
+
+            {
+                flight: "SB426",
+                airline: "SkyBlue Airlines",
+                destination: "London",
+                code: "LHR",
+                time: "14:15",
+                gate: "A09",
+                status: "Delayed",
+                statusClass: "status-delayed"
+            },
+
+            {
+                flight: "SB535",
+                airline: "SkyBlue Airlines",
+                destination: "Singapore",
+                code: "SIN",
+                time: "17:30",
+                gate: "B11",
+                status: "On Time",
+                statusClass: "status-ontime"
+            }
+
+        ];
+
+
+        /* ================= SHOW FLIGHTS ================= */
+
+        function showFlights(type, button) {
+
+            const tableBody =
+                document.getElementById("flightTableBody");
+
+            const buttons =
+                document.querySelectorAll(".flight-tabs button");
+
+            buttons.forEach(btn => {
+                btn.classList.remove("active");
+            });
+
+            button.classList.add("active");
+
+            const data =
+                type === "departures"
+                ? departures
+                : arrivals;
+
+
+            tableBody.innerHTML = "";
+
+
+            data.forEach(flight => {
+
+                tableBody.innerHTML += `
+
+                    <tr>
+
+                        <td>
+                            <span class="flight-number">
+                                ${flight.flight}
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="airline">
+                                ${flight.airline}
+                            </span>
+                        </td>
+
+                        <td>
+                            ${flight.destination}
+                            <span class="airport-code">
+                                ${flight.code}
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="time">
+                                ${flight.time}
+                            </span>
+                        </td>
+
+                        <td>
+                            ${flight.gate}
+                        </td>
+
+                        <td>
+                            <span class="status ${flight.statusClass}">
+                                ${flight.status}
+                            </span>
+                        </td>
+
+                    </tr>
+
+                `;
 
             });
 
-        });
+        }
+
+
+        /* ================= SEARCH FLIGHT ================= */
+
+        document
+            .getElementById("flightSearchForm")
+            .addEventListener("submit", function(event) {
+
+                event.preventDefault();
+
+                const flightNumber =
+                    document
+                        .getElementById("flightNumber")
+                        .value
+                        .trim()
+                        .toUpperCase();
+
+                const destination =
+                    document
+                        .getElementById("destination")
+                        .value;
+
+
+                if (!flightNumber && !destination) {
+
+                    alert(
+                        "Please enter a flight number or select a destination."
+                    );
+
+                    return;
+
+                }
+
+
+                const allFlights =
+                    [...departures, ...arrivals];
+
+
+                const result =
+                    allFlights.find(flight => {
+
+                        const numberMatch =
+                            !flightNumber ||
+                            flight.flight === flightNumber;
+
+                        const destinationMatch =
+                            !destination ||
+                            flight.destination === destination;
+
+                        return numberMatch && destinationMatch;
+
+                    });
+
+
+                if (result) {
+
+                    alert(
+                        `Flight ${result.flight} to ${result.destination} is ${result.status}.`
+                    );
+
+                } else {
+
+                    alert(
+                        "No matching flight was found. Please check your information."
+                    );
+
+                }
+
+            });
+
+
+        /* ================= TRACK FLIGHT ================= */
+
+        document
+            .getElementById("trackForm")
+            .addEventListener("submit", function(event) {
+
+                event.preventDefault();
+
+
+                const number =
+                    document
+                        .getElementById("trackNumber")
+                        .value
+                        .trim()
+                        .toUpperCase();
+
+
+                const resultBox =
+                    document.getElementById("trackResult");
+
+
+                const allFlights =
+                    [...departures, ...arrivals];
+
+
+                const flight =
+                    allFlights.find(item =>
+                        item.flight === number
+                    );
+
+
+                resultBox.style.display = "block";
+
+
+                if (flight) {
+
+                    resultBox.innerHTML = `
+
+                        <div class="airport-alert text-start">
+
+                            <i class="bi bi-check-circle-fill"></i>
+
+                            <div>
+
+                                <strong>
+                                    Flight ${flight.flight} Found
+                                </strong>
+
+                                <p>
+                                    ${flight.airline} —
+                                    ${flight.destination}
+                                    (${flight.code}) —
+                                    Scheduled at ${flight.time} —
+                                    Gate ${flight.gate} —
+                                    Status: ${flight.status}
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    `;
+
+                } else {
+
+                    resultBox.innerHTML = `
+
+                        <div class="airport-alert text-start">
+
+                            <i class="bi bi-exclamation-circle-fill"></i>
+
+                            <div>
+
+                                <strong>
+                                    Flight Not Found
+                                </strong>
+
+                                <p>
+                                    We couldn't find a flight with
+                                    number ${number}. Please check
+                                    the flight number and try again.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    `;
+
+                }
+
+            });
 
     </script>
 
