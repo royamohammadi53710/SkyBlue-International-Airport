@@ -1,715 +1,620 @@
-/* =========================================
-           GLOBAL
-        ========================================= */
 
-:root {
-    --sky: #38bdf8;
-    --sky-dark: #0284c7;
-    --sky-deep: #075985;
-    --sky-light: #e0f2fe;
-    --sky-soft: #f0f9ff;
+        :root {
+            --sky-blue: #38bdf8;
+            --sky-dark: #0284c7;
+            --sky-light: #e0f2fe;
+            --blue-dark: #0f172a;
+            --text-gray: #64748b;
+            --white: #ffffff;
+            --light-bg: #f8fbff;
+        }
 
-    --white: #ffffff;
-    --dark: #0f172a;
-    --gray: #64748b;
-    --border: #dbeafe;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    --green: #16a34a;
-    --green-bg: #dcfce7;
+        body {
+            font-family: "Inter", sans-serif;
+            color: var(--blue-dark);
+            background: var(--white);
+        }
 
-    --orange: #d97706;
-    --orange-bg: #fef3c7;
+        a {
+            text-decoration: none;
+        }
 
-    --red: #dc2626;
-    --red-bg: #fee2e2;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    font-family: "Inter", sans-serif;
-    background: #ffffff;
-    color: var(--dark);
-}
-
-/* =========================================
+        /* =========================
            NAVBAR
-        ========================================= */
-
-.navbar {
-    background: rgba(255, 255, 255, 0.97);
-    box-shadow: 0 4px 25px rgba(15, 23, 42, 0.07);
-    padding: 15px 0;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-.navbar-brand {
-    font-size: 1.35rem;
-    font-weight: 800;
-    color: var(--sky-deep);
-}
-
-.navbar-brand i {
-    color: var(--sky);
-    font-size: 1.7rem;
-    margin-right: 8px;
-}
-
-.nav-link {
-    color: #334155 !important;
-    font-weight: 500;
-    margin: 0 7px;
-    transition: 0.3s;
-}
-
-.nav-link:hover,
-.nav-link.active {
-    color: var(--sky-dark) !important;
-}
-
-.btn-sky {
-    background: var(--sky);
-    border: none;
-    color: white;
-    padding: 11px 22px;
-    border-radius: 10px;
-    font-weight: 600;
-    transition: 0.3s;
-}
-
-.btn-sky:hover {
-    background: var(--sky-dark);
-    color: white;
-    transform: translateY(-2px);
-}
-
-/* =========================================
-           PAGE HERO
-        ========================================= */
-
-.page-hero {
-    min-height: 390px;
-
-    background:
-        linear-gradient(135deg,
-            rgba(2, 132, 199, 0.96),
-            rgba(56, 189, 248, 0.82)),
-        url("https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=2000&q=85") center/cover no-repeat;
-
-    display: flex;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
-}
-
-.page-hero::before {
-    content: "";
-    position: absolute;
-    width: 420px;
-    height: 420px;
-    border: 80px solid rgba(255, 255, 255, 0.08);
-    border-radius: 50%;
-    right: -100px;
-    top: -120px;
-}
-
-.page-hero::after {
-    content: "";
-    position: absolute;
-    width: 250px;
-    height: 250px;
-    border: 45px solid rgba(255, 255, 255, 0.08);
-    border-radius: 50%;
-    left: -100px;
-    bottom: -130px;
-}
-
-.hero-content {
-    color: white;
-    position: relative;
-    z-index: 2;
-}
-
-.hero-label {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-
-    padding: 8px 16px;
-    border-radius: 50px;
-
-    background: rgba(255, 255, 255, 0.16);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-
-    font-size: 14px;
-    font-weight: 600;
-
-    backdrop-filter: blur(8px);
-
-    margin-bottom: 20px;
-}
-
-.hero-content h1 {
-    font-size: clamp(2.5rem, 5vw, 4.2rem);
-    font-weight: 800;
-    margin-bottom: 18px;
-}
-
-.hero-content p {
-    max-width: 680px;
-    font-size: 1.05rem;
-    line-height: 1.8;
-    opacity: 0.95;
-}
-
-.breadcrumb {
-    margin-top: 25px;
-}
-
-.breadcrumb-item,
-.breadcrumb-item a {
-    color: rgba(255, 255, 255, 0.85);
-    text-decoration: none;
-}
-
-.breadcrumb-item.active {
-    color: white;
-}
-
-/* =========================================
-           SEARCH SECTION
-        ========================================= */
-
-.search-wrapper {
-    margin-top: -55px;
-    position: relative;
-    z-index: 10;
-}
-
-.flight-search-card {
-    background: white;
-    padding: 30px;
-    border-radius: 20px;
-
-    box-shadow:
-        0 20px 50px rgba(15, 23, 42, 0.12);
-}
-
-.search-title {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 25px;
-}
-
-.search-title-icon {
-    width: 48px;
-    height: 48px;
-
-    background: var(--sky-light);
-    color: var(--sky-dark);
-
-    border-radius: 12px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 22px;
-}
-
-.search-title h4 {
-    margin: 0;
-    font-weight: 700;
-}
-
-.search-title p {
-    margin: 3px 0 0;
-    color: var(--gray);
-    font-size: 14px;
-}
-
-.form-label {
-    font-size: 14px;
-    font-weight: 600;
-    color: #334155;
-}
-
-.form-control,
-.form-select {
-    height: 52px;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    background: var(--sky-soft);
-}
-
-.form-control:focus,
-.form-select:focus {
-    border-color: var(--sky);
-    box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.12);
-}
-
-/* =========================================
-           SECTION
-        ========================================= */
-
-.section {
-    padding: 90px 0;
-}
-
-.section-light {
-    background: #f8fcff;
-}
-
-.section-heading {
-    margin-bottom: 40px;
-}
-
-.section-heading span {
-    color: var(--sky-dark);
-    text-transform: uppercase;
-    font-size: 13px;
-    letter-spacing: 1.5px;
-    font-weight: 700;
-}
-
-.section-heading h2 {
-    margin-top: 8px;
-    font-weight: 800;
-    font-size: 2.3rem;
-}
-
-.section-heading p {
-    color: var(--gray);
-    line-height: 1.8;
-    max-width: 650px;
-}
-
-/* =========================================
-           QUICK FLIGHT CARDS
-        ========================================= */
-
-.flight-info-card {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 18px;
-    padding: 28px;
-    height: 100%;
-    transition: 0.3s;
-}
-
-.flight-info-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--sky);
-    box-shadow: 0 15px 35px rgba(14, 165, 233, 0.10);
-}
-
-.flight-info-icon {
-    width: 58px;
-    height: 58px;
-
-    background: var(--sky-light);
-    color: var(--sky-dark);
-
-    border-radius: 15px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 25px;
-    margin-bottom: 20px;
-}
-
-.flight-info-card h5 {
-    font-weight: 700;
-    margin-bottom: 8px;
-}
-
-.flight-info-card p {
-    color: var(--gray);
-    font-size: 14px;
-    line-height: 1.7;
-    margin-bottom: 18px;
-}
-
-.flight-info-link {
-    text-decoration: none;
-    color: var(--sky-dark);
-    font-weight: 600;
-    font-size: 14px;
-}
-
-.flight-info-link:hover {
-    color: var(--sky-deep);
-}
-
-/* =========================================
-           FLIGHT TABS
-        ========================================= */
-
-.flight-tabs {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 25px;
-}
-
-.flight-tabs button {
-    border: none;
-    background: white;
-    color: var(--gray);
-
-    padding: 12px 22px;
-    border-radius: 10px;
-
-    font-weight: 600;
-    transition: 0.3s;
-}
-
-.flight-tabs button.active {
-    background: var(--sky-dark);
-    color: white;
-}
-
-.flight-tabs button:hover:not(.active) {
-    background: var(--sky-light);
-    color: var(--sky-dark);
-}
-
-/* =========================================
-           FLIGHT TABLE
-        ========================================= */
-
-.table-container {
-    background: white;
-    border-radius: 18px;
-    overflow: hidden;
-
-    box-shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
-    border: 1px solid #eaf4fb;
-}
-
-.flight-table {
-    min-width: 900px;
-}
-
-.flight-table thead {
-    background: var(--sky-dark);
-    color: white;
-}
-
-.flight-table th {
-    padding: 18px;
-    font-size: 14px;
-    font-weight: 600;
-    border: none;
-}
-
-.flight-table td {
-    padding: 18px;
-    vertical-align: middle;
-    border-color: #edf6fb;
-    font-size: 14px;
-}
-
-.flight-number {
-    font-weight: 700;
-    color: var(--sky-deep);
-}
-
-.airline-name {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.airline-icon {
-    width: 36px;
-    height: 36px;
-
-    background: var(--sky-light);
-    color: var(--sky-dark);
-
-    border-radius: 9px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.status {
-    display: inline-flex;
-    padding: 6px 12px;
-    border-radius: 50px;
-    font-size: 12px;
-    font-weight: 700;
-}
-
-.status-on-time {
-    background: var(--green-bg);
-    color: var(--green);
-}
-
-.status-boarding {
-    background: var(--sky-light);
-    color: var(--sky-dark);
-}
-
-.status-delayed {
-    background: var(--orange-bg);
-    color: var(--orange);
-}
-
-.status-cancelled {
-    background: var(--red-bg);
-    color: var(--red);
-}
-
-/* =========================================
-           FLIGHT TRACKER
-        ========================================= */
-
-.tracker-card {
-    background: linear-gradient(135deg,
-            #0284c7,
-            #38bdf8);
-
-    color: white;
-    border-radius: 20px;
-    padding: 35px;
-    height: 100%;
-}
-
-.tracker-card h4 {
-    font-weight: 700;
-}
-
-.tracker-card p {
-    color: rgba(255, 255, 255, 0.85);
-    line-height: 1.7;
-}
-
-.tracker-route {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin: 30px 0;
-}
-
-.airport-code {
-    font-size: 2rem;
-    font-weight: 800;
-}
-
-.airport-city {
-    font-size: 13px;
-    opacity: 0.8;
-}
-
-.route-line {
-    flex: 1;
-    height: 1px;
-    background: rgba(255, 255, 255, 0.4);
-    position: relative;
-}
-
-.route-plane {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-
-    transform: translate(-50%, -50%);
-
-    width: 38px;
-    height: 38px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background: white;
-    color: var(--sky-dark);
-
-    border-radius: 50%;
-}
-
-/* =========================================
-           TRAVEL TIPS
-        ========================================= */
-
-.tip-card {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 25px;
-    height: 100%;
-}
-
-.tip-number {
-    width: 40px;
-    height: 40px;
-
-    border-radius: 10px;
-
-    background: var(--sky-light);
-    color: var(--sky-dark);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-weight: 800;
-
-    margin-bottom: 18px;
-}
-
-.tip-card h6 {
-    font-weight: 700;
-}
-
-.tip-card p {
-    color: var(--gray);
-    font-size: 14px;
-    line-height: 1.7;
-    margin: 0;
-}
-
-/* =========================================
+        ========================== */
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.97);
+            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+            padding: 16px 0;
+        }
+
+        .navbar-brand {
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: var(--sky-dark);
+        }
+
+        .navbar-brand i {
+            color: var(--sky-blue);
+            margin-right: 7px;
+        }
+
+        .nav-link {
+            color: #334155 !important;
+            font-weight: 600;
+            margin-left: 18px;
+            transition: 0.3s;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--sky-dark) !important;
+        }
+
+        .nav-contact {
+            background: var(--sky-dark);
+            color: white !important;
+            padding: 9px 18px !important;
+            border-radius: 50px;
+        }
+
+        .nav-contact:hover {
+            background: #0369a1;
+        }
+
+        /* =========================
+           HERO
+        ========================== */
+
+        .hero {
+            min-height: 650px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background:
+                linear-gradient(
+                    rgba(2, 132, 199, 0.72),
+                    rgba(14, 165, 233, 0.65)
+                ),
+                url("https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1800&q=85")
+                center/cover no-repeat;
+        }
+
+        .hero-content {
+            color: white;
+            max-width: 750px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.18);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            padding: 9px 18px;
+            border-radius: 50px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            backdrop-filter: blur(8px);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.8rem, 6vw, 5rem);
+            font-weight: 800;
+            line-height: 1.05;
+            margin-bottom: 25px;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.92);
+            max-width: 650px;
+            margin-bottom: 32px;
+        }
+
+        .btn-main {
+            background: white;
+            color: var(--sky-dark);
+            font-weight: 700;
+            padding: 13px 25px;
+            border-radius: 50px;
+            border: none;
+            transition: 0.3s;
+        }
+
+        .btn-main:hover {
+            background: #e0f2fe;
+            color: #0369a1;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline-light-custom {
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.75);
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 700;
+            margin-left: 10px;
+            transition: 0.3s;
+        }
+
+        .btn-outline-light-custom:hover {
+            background: white;
+            color: var(--sky-dark);
+        }
+
+        /* =========================
+           FLIGHT SEARCH
+        ========================== */
+
+        .search-wrapper {
+            margin-top: -65px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .search-card {
+            background: white;
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: 0 15px 45px rgba(15, 23, 42, 0.13);
+        }
+
+        .search-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #475569;
+        }
+
+        .form-control,
+        .form-select {
+            min-height: 50px;
+            border: 1px solid #dbeafe;
+            border-radius: 10px;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: var(--sky-blue);
+            box-shadow: 0 0 0 0.2rem rgba(56, 189, 248, 0.15);
+        }
+
+        .search-btn {
+            min-height: 50px;
+            border-radius: 10px;
+            background: var(--sky-dark);
+            color: white;
+            border: none;
+            font-weight: 700;
+            width: 100%;
+        }
+
+        .search-btn:hover {
+            background: #0369a1;
+        }
+
+        /* =========================
+           GENERAL
+        ========================== */
+
+        .section {
+            padding: 90px 0;
+        }
+
+        .section-light {
+            background: var(--light-bg);
+        }
+
+        .section-title {
+            font-weight: 800;
+            font-size: 2.4rem;
+            margin-bottom: 12px;
+        }
+
+        .section-subtitle {
+            color: var(--text-gray);
+            max-width: 650px;
+            margin: 0 auto 45px;
+            line-height: 1.8;
+        }
+
+        .small-label {
+            color: var(--sky-dark);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        /* =========================
+           QUICK FLIGHT STATUS
+        ========================== */
+
+        .status-card {
+            border: none;
+            border-radius: 18px;
+            background: white;
+            padding: 28px;
+            height: 100%;
+            box-shadow: 0 8px 30px rgba(15, 23, 42, 0.07);
+            transition: 0.3s;
+        }
+
+        .status-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 15px 35px rgba(15, 23, 42, 0.11);
+        }
+
+        .status-icon {
+            width: 58px;
+            height: 58px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 15px;
+            background: var(--sky-light);
+            color: var(--sky-dark);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .status-card h4 {
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .status-card p {
+            color: var(--text-gray);
+            line-height: 1.7;
+        }
+
+        /* =========================
+           SERVICES
+        ========================== */
+
+        .service-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 18px;
+            overflow: hidden;
+            background: white;
+            height: 100%;
+            transition: 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 15px 35px rgba(15, 23, 42, 0.1);
+        }
+
+        .service-img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .service-content {
+            padding: 25px;
+        }
+
+        .service-content h4 {
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .service-content p {
+            color: var(--text-gray);
+            line-height: 1.7;
+        }
+
+        .learn-more {
+            color: var(--sky-dark);
+            font-weight: 700;
+        }
+
+        /* =========================
+           DESTINATIONS
+        ========================== */
+
+        .destination-card {
+            position: relative;
+            border-radius: 18px;
+            overflow: hidden;
+            height: 300px;
+        }
+
+        .destination-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+
+        .destination-card:hover img {
+            transform: scale(1.07);
+        }
+
+        .destination-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                transparent 35%,
+                rgba(15, 23, 42, 0.85)
+            );
+            display: flex;
+            align-items: flex-end;
+            padding: 25px;
+            color: white;
+        }
+
+        .destination-overlay h4 {
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+
+        .destination-overlay p {
+            margin: 0;
+            color: #e2e8f0;
+        }
+
+        /* =========================
+           ABOUT
+        ========================== */
+
+        .about-img {
+            width: 100%;
+            height: 470px;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+
+        .about-content {
+            padding-left: 25px;
+        }
+
+        .about-content h2 {
+            font-size: 2.6rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .about-content p {
+            color: var(--text-gray);
+            line-height: 1.9;
+        }
+
+        .about-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 25px;
+        }
+
+        .about-list li {
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .about-list i {
+            color: var(--sky-dark);
+            margin-right: 10px;
+        }
+
+        /* =========================
+           STATISTICS
+        ========================== */
+
+        .stats-section {
+            background: var(--sky-dark);
+            color: white;
+        }
+
+        .stat-box {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .stat-number {
+            font-size: 2.6rem;
+            font-weight: 800;
+        }
+
+        .stat-label {
+            color: #bae6fd;
+            margin-top: 5px;
+        }
+
+        /* =========================
+           CTA
+        ========================== */
+
+        .cta {
+            background: linear-gradient(
+                135deg,
+                #e0f2fe,
+                #f8fbff
+            );
+            border-radius: 25px;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-weight: 800;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .cta p {
+            color: var(--text-gray);
+            max-width: 650px;
+            margin: 0 auto 25px;
+        }
+
+        .cta-btn {
+            background: var(--sky-dark);
+            color: white;
+            padding: 13px 28px;
+            border-radius: 50px;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .cta-btn:hover {
+            background: #0369a1;
+            color: white;
+        }
+
+        /* =========================
            FOOTER
-        ========================================= */
+        ========================== */
 
-footer {
-    background: #082f49;
-    color: white;
-    padding: 70px 0 25px;
-}
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            padding: 65px 0 25px;
+        }
 
-footer h5 {
-    font-weight: 700;
-    margin-bottom: 20px;
-}
+        .footer-brand {
+            font-size: 1.5rem;
+            color: white;
+            font-weight: 800;
+            margin-bottom: 18px;
+        }
 
-footer p {
-    color: #bae6fd;
-    line-height: 1.8;
-}
+        .footer-brand i {
+            color: var(--sky-blue);
+            margin-right: 7px;
+        }
 
-.footer-links {
-    list-style: none;
-    padding: 0;
-}
+        footer p {
+            color: #94a3b8;
+            line-height: 1.8;
+        }
 
-.footer-links li {
-    margin-bottom: 12px;
-}
+        footer h5 {
+            color: white;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
 
-.footer-links a {
-    color: #bae6fd;
-    text-decoration: none;
-    transition: 0.3s;
-}
+        footer ul {
+            list-style: none;
+            padding: 0;
+        }
 
-.footer-links a:hover {
-    color: white;
-    padding-left: 4px;
-}
+        footer ul li {
+            margin-bottom: 10px;
+        }
 
-.social-links {
-    display: flex;
-    gap: 10px;
-}
+        footer ul li a {
+            color: #94a3b8;
+            transition: 0.3s;
+        }
 
-.social-links a {
-    width: 42px;
-    height: 42px;
+        footer ul li a:hover {
+            color: var(--sky-blue);
+        }
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+        .social-link {
+            display: inline-flex;
+            width: 40px;
+            height: 40px;
+            align-items: center;
+            justify-content: center;
+            background: #1e293b;
+            color: white;
+            border-radius: 50%;
+            margin-right: 7px;
+            transition: 0.3s;
+        }
 
-    color: white;
-    background: rgba(255, 255, 255, 0.1);
+        .social-link:hover {
+            background: var(--sky-dark);
+            color: white;
+        }
 
-    border-radius: 10px;
+        .copyright {
+            border-top: 1px solid #1e293b;
+            margin-top: 40px;
+            padding-top: 22px;
+            color: #64748b;
+            text-align: center;
+        }
 
-    text-decoration: none;
-    transition: 0.3s;
-}
-
-.social-links a:hover {
-    background: var(--sky);
-    transform: translateY(-3px);
-}
-
-.copyright {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    margin-top: 45px;
-    padding-top: 22px;
-    color: #7dd3fc;
-    font-size: 14px;
-}
-
-/* =========================================
+        /* =========================
            RESPONSIVE
-        ========================================= */
+        ========================== */
 
-@media (max-width: 991px) {
+        @media (max-width: 991px) {
 
-    .navbar-nav {
-        padding-top: 15px;
-    }
+            .nav-link {
+                margin-left: 0;
+                padding: 10px 0;
+            }
 
-    .navbar .btn-sky {
-        margin-top: 10px;
-    }
+            .nav-contact {
+                display: inline-block;
+                margin-top: 8px;
+            }
 
-    .tracker-card {
-        margin-top: 30px;
-    }
-}
+            .hero {
+                min-height: 600px;
+            }
 
-@media (max-width: 767px) {
+            .about-content {
+                padding-left: 0;
+                margin-top: 35px;
+            }
+        }
 
-    .page-hero {
-        min-height: 340px;
-    }
+        @media (max-width: 767px) {
 
-    .section {
-        padding: 65px 0;
-    }
+            .hero h1 {
+                font-size: 2.8rem;
+            }
 
-    .flight-search-card {
-        padding: 22px;
-    }
+            .hero p {
+                font-size: 1rem;
+            }
 
-    .section-heading h2 {
-        font-size: 2rem;
-    }
+            .btn-outline-light-custom {
+                margin-left: 0;
+                margin-top: 12px;
+            }
 
-    .flight-tabs {
-        overflow-x: auto;
-        padding-bottom: 5px;
-    }
+            .search-wrapper {
+                margin-top: -35px;
+            }
 
-    .flight-tabs button {
-        white-space: nowrap;
-    }
+            .section {
+                padding: 65px 0;
+            }
 
-    .tracker-route {
-        gap: 8px;
-    }
+            .section-title {
+                font-size: 2rem;
+            }
 
-    .airport-code {
-        font-size: 1.5rem;
-    }
-}
+            .about-img {
+                height: 330px;
+            }
+
+            .cta {
+                padding: 45px 20px;
+            }
+
+            .cta h2 {
+                font-size: 2rem;
+            }
+        }
+  
