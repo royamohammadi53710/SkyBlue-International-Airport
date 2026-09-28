@@ -37,29 +37,44 @@
         /* ================= NAVBAR ================= */
 
         .navbar {
-            background: #ffffff;
-            box-shadow: 0 2px 18px rgba(0, 90, 130, 0.08);
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.07);
+            padding: 16px 0;
         }
 
         .navbar-brand {
-            color: #008fd5 !important;
+            font-size: 1.45rem;
             font-weight: 800;
-            font-size: 1.35rem;
+            color: var(--sky-dark);
+        }
+
+        .navbar-brand i {
+            color: var(--sky-blue);
+            margin-right: 7px;
         }
 
         .nav-link {
-            color: #17324d !important;
+            color: #334155 !important;
             font-weight: 600;
-            margin-left: 8px;
-            margin-right: 8px;
+            margin-left: 18px;
+            transition: 0.3s;
         }
 
         .nav-link:hover,
         .nav-link.active {
-            color: #008fd5 !important;
+            color: var(--sky-dark) !important;
         }
 
+        .nav-contact {
+            background: var(--sky-dark);
+            color: white !important;
+            padding: 9px 18px !important;
+            border-radius: 50px;
+        }
 
+        .nav-contact:hover {
+            background: #0369a1;
+        }
         /* ================= HERO ================= */
 
         .flight-hero {
